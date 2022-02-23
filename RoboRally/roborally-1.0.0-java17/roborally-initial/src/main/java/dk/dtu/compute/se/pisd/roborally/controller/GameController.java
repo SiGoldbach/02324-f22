@@ -22,13 +22,13 @@
 package dk.dtu.compute.se.pisd.roborally.controller;
 
 import dk.dtu.compute.se.pisd.roborally.model.*;
+import dk.dtu.compute.se.pisd.roborally.view.BoardView;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
 public class GameController {
 
@@ -44,8 +44,24 @@ public class GameController {
      *
      * @param space the space to which the current player should move
      */
-    public void moveCurrentPlayerToSpace(@NotNull Space space)  {
-        board.getCurrentPlayer().setSpace(space);
+    public void moveCurrentPlayerToSpace(@NotNull Space space) {
+        if (space.getPlayer() == null) {
+            board.getCurrentPlayer().setSpace(space);
+            board.setCounter(board.getCounter() + 1);
+            for (int i = 0; i < board.getPlayers().size(); i++) {
+                if (i == board.getPlayers().size() - 1) {
+                    board.setCurrentPlayer(board.getPlayers().get(0));
+                    break;
+                }
+                if (board.getCurrentPlayer().equals(board.getPlayers().get(i))) {
+                    board.setCurrentPlayer(board.getPlayers().get(i + 1));
+                    break;
+                }
+
+
+            }
+        }
+
         // TODO Assignment V1: method should be implemented by the students:
         //   - the current player should be moved to the given space
         //     (if it is free()
@@ -63,7 +79,8 @@ public class GameController {
     public void notImplememted() {
         // XXX just for now to indicate that the actual method to be used by a handler
         //     is not yet implemented
-    };
+    }
+
 
     public boolean moveCards(@NotNull CommandCardField source, @NotNull CommandCardField target) {
         CommandCard sourceCard = source.getCard();

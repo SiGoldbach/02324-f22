@@ -110,7 +110,6 @@ public class BoardView extends VBox implements ViewObserver {
                 Board board = space.board;
 
                 if (board == gameController.board) {
-                    System.out.println("x værdi af klik: "+space.x+ "  y værdi af klik: "+space.y);
                     gameController.moveCurrentPlayerToSpace(space);
                     event.consume();
                 }

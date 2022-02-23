@@ -38,7 +38,6 @@ import org.jetbrains.annotations.NotNull;
  * ...
  *
  * @author Ekkart Kindler, ekki@dtu.dk
- *
  */
 public class BoardView extends VBox implements ViewObserver {
 
@@ -100,6 +99,8 @@ public class BoardView extends VBox implements ViewObserver {
             this.gameController = gameController;
         }
 
+        //Here we have the root of the w1 challenge, this handle method registers a mouse click,
+        // on the board and the resend the new space to method which should be coded.
         @Override
         public void handle(MouseEvent event) {
             Object source = event.getSource();
@@ -109,6 +110,7 @@ public class BoardView extends VBox implements ViewObserver {
                 Board board = space.board;
 
                 if (board == gameController.board) {
+                    System.out.println("x værdi af klik: "+space.x+ "  y værdi af klik: "+space.y);
                     gameController.moveCurrentPlayerToSpace(space);
                     event.consume();
                 }
